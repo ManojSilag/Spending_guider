@@ -1,3 +1,12 @@
+//Listen for auth status changes
+auth.onAuthStateChanged(user => {
+    //console.log(user);
+    if(user){
+        console.log('user logged in: ', user);
+    } else {
+        console.log('User logged out');
+    }
+})
 
 // signUp
 const signupForm = document.getElementById('signup-form');
@@ -31,14 +40,10 @@ const logout = document.querySelector('#logout');
     logout.addEventListener('click',(e) => {
         e.preventDefault();
         auth.signOut()
-            .then(() => {
-            console.log('user signed out');
-            })
             .catch(err =>{
             alert(err.message)
             })
     });
-
 
 //Login
 const loginForm = document.querySelector('#login-form');
@@ -54,7 +59,7 @@ const loginForm = document.querySelector('#login-form');
 
         auth.signInWithEmailAndPassword(email, password)
         .then((cred) =>{
-        console.log(cred.user);
+        //console.log(cred.user);
 
         //close the login model and reset form
         const modal = document.querySelector('#modal-login');
