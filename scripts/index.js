@@ -7,8 +7,6 @@ const setupGuides = (data) => {
   //   console.log(doc.data());
   // })
 
-
-  console.log(data.length);
   
   if(data.length){ 
   let html = '';
