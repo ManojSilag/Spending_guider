@@ -7,9 +7,17 @@ db.collection('guides').get().then(snapshot => {
 auth.onAuthStateChanged(user => {
     //console.log(user);
     if(user){
-        console.log('user logged in: ', user);
+        console.log('in');
+        
+        // get data
+        db.collection('guides').get().then(snapshot => {
+        setupGuides(snapshot.docs);
+        });
+
     } else {
-        console.log('User logged out');
+        setupGuides([]);
+        console.log('out');
+        
     }
 })
 
@@ -26,7 +34,7 @@ const signupForm = document.getElementById('signup-form');
         const password = signupForm['signup-password'].value
         //console.log(password);
 
-        //sighing up the user
+        //sighing up the user 
         auth.createUserWithEmailAndPassword(email, password)
         .then(cred => {
         console.log(cred.user);
