@@ -1,5 +1,20 @@
 
 const guideList = document.querySelector('.guides');
+const loggedOutLinks =document.querySelectorAll('.logged-out');
+const loggedInLinks =document.querySelectorAll('.logged-in');
+
+//conditional menu links
+const setupUI = (user) => {
+    if(user){
+    //toggle UI elements
+    loggedInLinks.forEach(item => item.style.display = 'block');
+    loggedOutLinks.forEach(item => item.style.display = 'none');
+    } else{
+    //toggle UI elements
+    loggedInLinks.forEach(item => item.style.display = 'none');
+    loggedOutLinks.forEach(item => item.style.display = 'block');
+    }
+  }
 
 //setup guides
 const setupGuides = (data) => {
@@ -7,8 +22,6 @@ const setupGuides = (data) => {
   //   console.log(doc.data());
   // })
 
-
-  console.log(data.length);
   
   if(data.length){ 
   let html = '';
