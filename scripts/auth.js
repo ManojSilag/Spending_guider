@@ -33,7 +33,7 @@ const signupForm = document.getElementById('signup-form');
         const email =signupForm['signup-email'].value
         //console.log(email);
         const password = signupForm['signup-password'].value
-        //console.log(password);
+       
 
         //sighing up the user 
         auth.createUserWithEmailAndPassword(email, password)
