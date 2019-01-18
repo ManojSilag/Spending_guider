@@ -8,13 +8,14 @@ auth.onAuthStateChanged(user => {
     //console.log(user);
     if(user){
         console.log('in');
-        
+        setupUI(user);
         // get data
         db.collection('guides').get().then(snapshot => {
         setupGuides(snapshot.docs);
         });
 
     } else {
+        setupUI();
         setupGuides([]);
         console.log('out');
         
