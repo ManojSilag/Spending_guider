@@ -7,12 +7,12 @@ db.collection('guides').get().then(snapshot => {
 auth.onAuthStateChanged(user => {
     //console.log(user);
     if(user){
-        console.log('in');
+        console.log('In: ', user );
         setupUI(user);
         // get data
-        db.collection('guides').get().then(snapshot => {
+        db.collection('guides').onSnapshot(snapshot => {
         setupGuides(snapshot.docs);
-        });
+        }).catch(error => error)
 
     } else {
         setupUI();
@@ -37,7 +37,6 @@ createForm.addEventListener('submit', (e) => {
     createForm.reset();
     }).catch(err => {
         console.log(err.message);
-        
     })
 });
 
