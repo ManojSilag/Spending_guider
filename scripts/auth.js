@@ -19,8 +19,7 @@ auth.onAuthStateChanged(user => {
     } else {
         setupUI();
         setupGuides([]);
-        console.log('out');
-        
+        console.log('out');  
     }
 });
 
