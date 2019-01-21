@@ -8,11 +8,13 @@ auth.onAuthStateChanged(user => {
     //console.log(user);
     if(user){
         console.log('In: ', user );
-        setupUI(user);
         // get data
         db.collection('guides').onSnapshot(snapshot => {
         setupGuides(snapshot.docs);
-        }).catch(error => error)
+        setupUI(user);
+        }, err =>{
+            console.log(err.message);
+        });
 
     } else {
         setupUI();
@@ -56,10 +58,15 @@ const signupForm = document.getElementById('signup-form');
         //sighing up the user 
         auth.createUserWithEmailAndPassword(email, password)
         .then(cred => {
-        console.log(cred.user);
-        const modal = document.querySelector('#modal-signup');
-        M.Modal.getInstance(modal).close();
-        signupForm.reset();
+            return db.collection('users').doc(cred.user.uid).set({
+                bio: signupForm['signup-bio'].value
+            })
+           .then(() =>{
+            console.log(cred.user);
+            const modal = document.querySelector('#modal-signup');
+            M.Modal.getInstance(modal).close();
+            signupForm.reset();
+            })
         })
         .catch(err =>{
         alert(err.message)
