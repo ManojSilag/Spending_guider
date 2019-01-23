@@ -1,4 +1,4 @@
-// get data
+// get data from database
 db.collection('guides').get().then(snapshot => {
     setupGuides(snapshot);
 })
